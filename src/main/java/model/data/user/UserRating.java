@@ -161,9 +161,9 @@ public class UserRating extends UserRate{
 	@Override
 	protected void putValues() {
 		super.putValues();
-		this.addValue("pubKeyFrom", this.getPubKeyFrom());
-		this.addValue("pubKeyTO", this.getPubKeyTo());
-		this.addValue("date", this.getDate());
+		this.addValue("pubKeyFrom", this.getPubKeyFrom().toString());
+		this.addValue("pubKeyTo", this.getPubKeyTo().toString());
+		this.addValue("date", this.getDate().toString());
 	}
 
 	@Override
@@ -176,9 +176,9 @@ public class UserRating extends UserRate{
 		String val = e.getText();
 
 		switch(e.getName()) {
-			case "date": setDate(val); return true;
-			case "pubKeyFrom": setPubKeyFrom (val); return true;
-			case "pubKeyTo": setPubKeyTo (val); return true;
+			case "pubKeyFrom": setPubKeyFrom(new BigInteger(val)); return true;
+			case "pubKeyTo": setPubKeyTo(new BigInteger(val)); return true;
+			case "date": setDate(new Long(val)); return true;
 		}
 
 		return super.handleElement(e);
