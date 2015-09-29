@@ -64,7 +64,7 @@ import net.jxta.peergroup.PeerGroup;
  * a class. This helps to produce a valid xml file for JXTA(datas and indexes) or for our own use.
  * There is a few abstract method to implements. You can use addKey and addValue method in setKeys and putvalues.
  * This abstract class give an auto signature method.
- * Each time you call a method that will called your putValues method, the lastUpdated field is updated.
+ * Each time you call a method that will call your putValues method, the lastUpdated field is updated.
  * @author Julien Prudhomme
  */
 public abstract class AbstractAdvertisement extends Advertisement{
