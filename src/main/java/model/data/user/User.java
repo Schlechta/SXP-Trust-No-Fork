@@ -1,5 +1,5 @@
 /* Copyright 2015 Pablo Arrighi, Sarah Boukris, Mehdi Chtiwi, 
-   Michael Dubuis, Kevin Perrot, Julien Prudhomme.
+   Michael Dubuis, Kevin Perrot, Julien Prudhomme, Schlechta.
 
    This file is part of SXP.
 
@@ -39,7 +39,7 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	private String email;			// The email of the user
 	private String phone;			// The phone of the user
 	private long date;				// The date of creation/update of the user's profile
-	
+	private UserRate rate;			// The general rate of the user.
 	private String clearPassword;	// is never saved, not null only if a user log in this.
 	
 	/**
@@ -66,6 +66,8 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 		this.email = email;
 		this.phone = phone;
 		this.date = System.currentTimeMillis();
+		this.rate = new UserRate();
+
 		setKeys(new AsymKeysImpl(false, passWord));		// TODO false / true finally choice ?
 	}
 	
@@ -74,6 +76,7 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	 */
 	public User(){ 
 		super(); 
+		this.rate = new UserRate();
 	}
 	
 	/**
@@ -135,7 +138,9 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	public long getDate(){
 		return date;
 	}
-	
+	public UserRate getRate(){
+		return rate;
+	}
 	public String getClearPwd(){
 		return clearPassword;
 	}
@@ -168,7 +173,15 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	public void setDate(long date){
 		this.date = date == 0 ? System.currentTimeMillis() : date;
 	}
-
+	public void setRate(UserRate rate){
+		this.rate = rate;
+	}
+	public void setRate(float rapidity, float conformity){
+		this.rate = new UserRate(rapidity, conformity);
+	}
+	public void setRate(){
+		this.rate = new UserRate();
+	}
 	public void setClearPwd(String password){
 		this.clearPassword = password;
 	}
@@ -195,6 +208,7 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 		this.addKey("email", false, true);
 		this.addKey("phone", false, true);
 		this.addKey("date", false, false);
+		this.addKey("rate", true, true);
 	}
 
 	/**
@@ -208,7 +222,8 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 		this.addValue("firstName", this.getFirstName());
 		this.addValue("email", this.getEmail());
 		this.addValue("phone", this.getPhone());
-		this.addValue("date",Long.toString(this.getDate()));
+		this.addValue("date", Long.toString(this.getDate()));
+		this.addValue("rate", 
 	}
 
 	@Override
