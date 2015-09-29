@@ -15,14 +15,16 @@
 
 package model.data.user;
 
+import model.advertisement.AbstractAdvertisement;
+import org.jdom2.Element;
+
 /**
  * This class contains a set of two rates that one user can give to another one.
  * The rapidity and conformity of a transaction is so evaluated during this process.
  */
-public class UserRate {
+public class UserRate extends AbstractAdvertisement{
 	private float rapidity;
 	private float conformity;
-	private long date;
 
 	/**
 	 * Create a new couple of rating through two given values.
@@ -46,6 +48,27 @@ public class UserRate {
 		this.date = System.currentTimeMillis();
 	}
 
+	/**
+	 * Construct a new personal user rating based on a XML, well and known formated string.
+	 * @param XML
+	 */
+	public User(String XML) {
+		super(XML);
+	}
+
+	/**
+	 * Construct a new personal user rating based on an XML element
+	 * @param u
+	 */
+	public User(Element u) {
+		super(u);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public User(net.jxta.document.Element u) {
+		super(u);
+	}
+
 	// Getters
 	public String getRapidity() {
 		return rapidity;
@@ -55,10 +78,6 @@ public class UserRate {
 		return conformity;
 	}
 
-	public long getDate() {
-		return date;
-	}
-
 	// Setters
 	public void setRapidity(float rapidity) {
 		this.rapidity = (rapidity < 0 || rapidity > 5) ? -1 : rapidity;
@@ -66,5 +85,50 @@ public class UserRate {
 
 	public void setConfromity(float conformity) {
 		this.conformity = (conformity < 0 || conformity > 5) ? -1 : conformity;
+	}
+
+	// Advertisement
+
+	/**
+	 * Used to define Keys and initialize some values
+	 */
+	@Override
+	protected void setKeys() {
+		this.addKey("rapidity", true, true);
+		this.addKey("conformity", true, true);
+	}
+
+	/**
+	 * Used to add all keys
+	 */
+	@Override
+	protected void putValues() {
+		this.addValue("rapidity", this.getRapidity());
+		this.addValue("conformity", this.getConformity());
+	}
+
+	@Override
+	protected String getAdvertisementName() {
+		return this.getClass().getName();
+	}
+
+	@Override
+	protected boolean handleElement(org.jdom2.Element e) {
+		String val = e.getText();
+		switch(e.getName()) {
+			case "rapidity": setRapidity(val); return true;
+			case "conformity": setConfromity(val); return true;
+		}
+		return false;
+	}
+
+	@Override
+	public UserRate clone(){
+		return new UserRate(this.getRapidity(), this.getConformity());
+	}
+
+	@Override
+	public String getSimpleName() {
+		return getClass().getSimpleName();
 	}
 }
