@@ -107,8 +107,8 @@ public class UserRate extends AbstractAdvertisement{
 	 */
 	@Override
 	protected void putValues() {
-		this.addValue("rapidity", this.getRapidity());
-		this.addValue("conformity", this.getConformity());
+		this.addValue("rapidity", this.getRapidity().toString());
+		this.addValue("conformity", this.getConformity().toString());
 	}
 
 	@Override
@@ -120,8 +120,8 @@ public class UserRate extends AbstractAdvertisement{
 	protected boolean handleElement(org.jdom2.Element e) {
 		String val = e.getText();
 		switch(e.getName()) {
-			case "rapidity": setRapidity(val); return true;
-			case "conformity": setConformity(val); return true;
+			case "rapidity": setRapidity(new Float(val)); return true;
+			case "conformity": setConformity(new Float(val)); return true;
 		}
 		return false;
 	}
