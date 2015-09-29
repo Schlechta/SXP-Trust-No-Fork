@@ -35,7 +35,12 @@ public class UserRate extends AbstractAdvertisement{
 		super();
 		this.rapidity = rapidity;
 		this.conformity = conformity;
-		this.date = System.currentTimeMillis();
+	}
+
+	public UserRate(UserRate rate){
+		super();
+		this.rapidity = rate.getRapidity();
+		this.conformity = rate.getConformity();
 	}
 
 	/**
@@ -45,14 +50,13 @@ public class UserRate extends AbstractAdvertisement{
 		super();
 		this.rapidity = -1;
 		this.conformity = -1;
-		this.date = System.currentTimeMillis();
 	}
 
 	/**
 	 * Construct a new personal user rating based on a XML, well and known formated string.
 	 * @param XML
 	 */
-	public User(String XML) {
+	public UserRate(String XML) {
 		super(XML);
 	}
 
@@ -60,12 +64,12 @@ public class UserRate extends AbstractAdvertisement{
 	 * Construct a new personal user rating based on an XML element
 	 * @param u
 	 */
-	public User(Element u) {
+	public UserRate(Element u) {
 		super(u);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public User(net.jxta.document.Element u) {
+	public UserRate(net.jxta.document.Element u) {
 		super(u);
 	}
 
@@ -117,7 +121,7 @@ public class UserRate extends AbstractAdvertisement{
 		String val = e.getText();
 		switch(e.getName()) {
 			case "rapidity": setRapidity(val); return true;
-			case "conformity": setConfromity(val); return true;
+			case "conformity": setConformity(val); return true;
 		}
 		return false;
 	}
