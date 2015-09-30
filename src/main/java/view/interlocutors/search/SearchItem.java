@@ -63,6 +63,8 @@ public class SearchItem extends AbstractInterlocutor implements SearchListener<I
 			content.put("image", event.getImage());
 			content.put("lifetime", DateConverter.getString(event.getLifeTime()+event.getDate()));
 			content.put("type", event.getType());
+			content.put("conformity","1");
+			content.put("rapidity","2");
 			data.put("content", content);
 			com.sendText(data.toString());
 		} catch (JSONException e) {
