@@ -69,6 +69,7 @@ public class AdvertisementInstaciator implements Instantiator{
 	public static void RegisterAllAdv() {
 		Item.register();
 		User.register();
+		UserRating.register();
 	}
 
 }

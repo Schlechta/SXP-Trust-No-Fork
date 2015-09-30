@@ -78,6 +78,18 @@ public class UserRating extends UserRate implements Comparable<UserRating>{
 	public UserRating(BigInteger pubKeyTo){ 
 		super();
 		this.pubKeyTo = pubKeyTo;
+		this.pubKeyFrom = ManagerBridge.getCurrentUser().getKeys().getPublicKey();
+		this.date = System.currentTimeMillis();
+	}
+
+	/**
+	 * Empty constructor.
+	 * @param pubKeyTo
+	 */
+	public UserRating(){ 
+		super();
+		this.pubKeyFrom = ManagerBridge.getCurrentUser().getKeys().getPublicKey();
+		this.pubKeyTo = ManagerBridge.getCurrentUser().getKeys().getPublicKey();
 		this.date = System.currentTimeMillis();
 	}
 
@@ -144,6 +156,15 @@ public class UserRating extends UserRate implements Comparable<UserRating>{
 
 	public void setDate (long date){
 		this.date = date;
+	}
+
+
+	/**
+	 * Give the good class to the constructor
+	 */
+	public static void register() {
+		UserRating u = new UserRating();
+		AdvertisementFactory.registerAdvertisementInstance(u.getAdvType(), new AdvertisementInstaciator(u));
 	}
 
 	// Advertisement
