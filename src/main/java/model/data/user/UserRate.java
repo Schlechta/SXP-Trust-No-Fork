@@ -135,4 +135,29 @@ public class UserRate extends AbstractAdvertisement{
 	public String getSimpleName() {
 		return getClass().getSimpleName();
 	}
+
+	/**
+	 * @return boolean 0 if both are identical, 1 else
+	 */
+	public int compareTo(UserRate rate) {
+		if(this.equals(rate))
+			return 0;
+		if(this.getRapidity() != (rate.getRapidity()))
+			return this.getRapidity() > rate.getConformity() ? 1 : -1;
+		if(this.getConformity() != (rate.getRapidity()))
+			return this.getConformity() > rate.getConformity() ? 1 : -1;
+
+		return 0;
+	}
+
+	public boolean equals(Object o){
+		if(!(o instanceof UserRate))
+			return false;
+		UserRate rate = (UserRate) o;
+
+		if(this.getRapidity() != (rate.getRapidity()) ||
+			this.getConformity() != (rate.getConformity()))
+			return false;
+		return true;
+	}
 }

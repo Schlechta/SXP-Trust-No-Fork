@@ -200,11 +200,35 @@ public class UserRating extends UserRate implements Comparable<UserRating>{
 	}
 
 	/**
-	 * Give the good class to the constructor
+	 * @return boolean 0 if both are identical, 1 else
 	 */
-	public static void register() {
-		UserRating r = new UserRating();
-		System.out.println(r.getAdvType());
-		AdvertisementFactory.registerAdvertisementInstance(r.getAdvType(), new AdvertisementInstaciator(r));
+	@Override
+	public int compareTo(UserRating rating) {
+		if(this.equals(rating))
+			return 0;
+		if(this.getDate() != rating.getDate())
+			return this.getDate() > rating.getDate() ? 1 : -1;
+		if(!this.getPubKeyFrom().equals(rating.getPubKeyFrom()))
+			return this.getPubKeyFrom().compareTo(rating.getPubKeyFrom());
+		if(!this.getPubKeyTo().equals(rating.getPubKeyTo()))
+			return this.getPubKeyTo().compareTo(rating.getPubKeyTo());
+		if(!this.getRate().equals(rating.getRate()))
+			return this.getRate().compareTo(rating.getRate());
+
+		return 0;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(!(o instanceof UserRating))
+			return false;
+		UserRating rating = (UserRating) o;
+
+		if(!this.getPubKeyFrom().equals(rating.getPubKeyFrom()) ||
+				!this.getPubKeyTo().equals(rating.getPubKeyTo()) ||
+				!this.getRate().equals(rating.getRate()) ||
+				this.getDate() != rating.getDate())
+			return false;
+		return true;
 	}
 }
