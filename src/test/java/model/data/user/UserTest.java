@@ -1,5 +1,5 @@
 /* Copyright 2015 Pablo Arrighi, Sarah Boukris, Mehdi Chtiwi, 
-   Michael Dubuis, Kevin Perrot, Julien Prudhomme.
+   Michael Dubuis, Kevin Perrot, Julien Prudhomme, Schlechta.
 
    This file is part of SXP.
 
@@ -41,6 +41,7 @@ public class UserTest {
 	private static String phone = "phone";
 	private static long date = System.currentTimeMillis();
 	private static AsymKeysImpl key = new AsymKeysImpl(password);
+	private static UserRate rate = new (3,4);
 	
 	@Test
 	public void password(){
