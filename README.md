@@ -1,4 +1,12 @@
-SXP Project
+SXP Project -- Trust
 =========
-http://secure-exchange-protocols.org/index.php?title=Main_Page
-SXP java implementation, in a P2P trading application.
+
+Nom de l'equipe : Guinness
+Membres :
+- Talia Lacombe
+- Haguen Berkouk
+- Tristan Berton
+- Guillaume Rivas
+- Diouldé Sall
+- Kevin Grard
+
