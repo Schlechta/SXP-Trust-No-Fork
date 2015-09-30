@@ -26,10 +26,10 @@ import model.data.user.UserRating;
 import model.network.search.Search;
 import model.network.search.SearchListener;
 
-public class SearchUserController implements SearchListener<UserRating>{
+public class SearchUserRatingController implements SearchListener<UserRating>{
 	
 	private ArrayList<SearchListener<UserRating>> listeners = new ArrayList<SearchListener<UserRating>>();
-	private HashMap<String, UserRating> ratings = new HashMap<>();
+	private HashMap<String, UserRating> ratings = new HashMap<String, UserRating>();
 	
 	public void startSearch(String nick) {
 		Search<UserRating> s = new Search<UserRating>(Application.getInstance().getNetwork(), UserRating.class.getSimpleName(), "nick", false);
@@ -60,9 +60,12 @@ public class SearchUserController implements SearchListener<UserRating>{
 	}
 	
 	@Override
+	/**
+	 * Receive a Rating and filter it.
+	 */
 	public void searchEvent(UserRating event) {
 		if(!event.checkSignature(event.getKeys())) {
-			System.out.println("bad signature for " + event.getNick());
+			System.out.println("Rating from: " + event.getPubKeyFrom() + "\nto: " + event.getPubKeyTo() + "\nbad signature");
 			return;
 		}
 		if(ratings.containsKey(event.getKeys().getPublicKey().toString(16))) {
