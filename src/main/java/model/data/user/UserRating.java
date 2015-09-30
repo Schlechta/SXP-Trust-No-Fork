@@ -24,7 +24,7 @@ import org.jdom2.Element;
 /**
  * This class extends UserRate with a date and a connection between users through their public keys.
  */
-public class UserRating extends UserRate{
+public class UserRating extends UserRate implements Comparable<UserRating>{
 	private BigInteger pubKeyFrom;
 	private BigInteger pubKeyTo;
 	private long date;
@@ -197,5 +197,14 @@ public class UserRating extends UserRate{
 	@Override
 	public String getSimpleName() {
 		return getClass().getSimpleName();
+	}
+
+	/**
+	 * Give the good class to the constructor
+	 */
+	public static void register() {
+		UserRating r = new UserRating();
+		System.out.println(r.getAdvType());
+		AdvertisementFactory.registerAdvertisementInstance(r.getAdvType(), new AdvertisementInstaciator(r));
 	}
 }
