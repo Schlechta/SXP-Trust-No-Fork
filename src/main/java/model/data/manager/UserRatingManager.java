@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import net.jxta.discovery.DiscoveryService;
 
@@ -39,7 +44,7 @@ import model.data.user.UserMessage;
 import model.network.search.Search;
 
 public class UserRatingManager extends UserManager{
-	private HashMap<BigInteger, HashMap<BigInteger, UserRating>> ratings = new HashMap<String,HashMap<String, UserRating>>;  // The string key is the user's public key in hexadecimal
+	private HashMap<BigInteger, HashMap<BigInteger, UserRating>> ratings = new HashMap<BigInteger, HashMap<BigInteger, UserRating>>();  // The string key is the user's public key in hexadecimal
 
 	// Constructor
 	public UserRatingManager(Manager m) {
@@ -73,38 +78,35 @@ public class UserRatingManager extends UserManager{
 	 * @return
 	 */
 	public UserRating getUserRating(BigInteger to, BigInteger from){
-		ratings.get(to).get(from);
+		return ratings.get(to).get(from);
 	}
+/*
+	public ArrayList<UserRating> getUserRapidityRate(BigInteger to) {
+		int i = 0;
+		float total = 0;
+		Set<Map.Entry<BigInteger, UserRating>> entrySet = ratings.get(to).entrySet();
 
-	/**
-	 * Return the user's rates array list.
-	 * @param to
-	 * @return a new list containing user's items
-	 */
-	public ArrayList<UserRating> getUserRatingArray(to) {
-		HashMap<BigInteger, UserRating> finalMap = getUserRatingHashmap(to);
-		Iterator<Integer> kIterator = finalMap.keySet().iterator();
-
-		ArrayList<UserRating> ratingArray = new ArrayList<UserRating>();
-
-		while(kIterator.hasNext()){
-			UserRating key = kIterator.next();
-			ratingArray.add(key);
+		for (Entry entry : entrySet) {
+			i++;
+			total += entry.getValue().getRapidity();
 		}
+		if (i == 0) return -1;
 
-		return userItems;
+		return total / i;
 	}
-
-	
+*/
 	// Adders
 
 	/**
 	 * Add a rating
 	 * @param from the pubKey
 	 * @param to the pubKey
-	 * @param publish true if the note is emmediatly publish on the network.
+	 * @param rate
 	 */
-	public void addRate(BigInteger from, BigInteger to) {
-
+	public void addRate(BigInteger from, BigInteger to, UserRating rate) {
+		if(ratings.containsKey(to)){
+			ratings.put(to, new HashMap<BigInteger, UserRating>());
+		}
+		ratings.get(to).put(from, rate);
 	}
 }

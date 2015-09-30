@@ -25,6 +25,7 @@ import model.data.user.UserRate;
 import model.data.user.UserRating;
 import model.network.search.Search;
 import model.network.search.SearchListener;
+import java.math.BigInteger;
 
 public class SearchUserRatingController implements SearchListener<UserRating>{
 	
@@ -38,11 +39,11 @@ public class SearchUserRatingController implements SearchListener<UserRating>{
 		s.search(nick, 0, 0);
 	}
 	
-	public void startSearchByPublicKey(String publicKey) {
+	public void startSearchByPublicKey(BigInteger publicKey) {
 		Search<UserRating> s = new Search<UserRating>(Application.getInstance().getNetwork(), UserRating.class.getSimpleName(), "superPublicKey", false);
 		s.addListener(this);
 		System.out.println("start search for user with public key " + publicKey);
-		s.search(publicKey, 3000, 5);
+		s.search(String.valueOf(publicKey), 3000, 5);
 	}
 	
 	public UserRating getPublicKeyResult() {

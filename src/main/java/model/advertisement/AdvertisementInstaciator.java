@@ -17,6 +17,7 @@ package model.advertisement;
 
 import model.data.item.Item;
 import model.data.user.User;
+import model.data.user.UserRating;
 import net.jxta.document.Advertisement;
 import net.jxta.document.AdvertisementFactory.Instantiator;
 import net.jxta.document.Element;
@@ -69,7 +70,7 @@ public class AdvertisementInstaciator implements Instantiator{
 	public static void RegisterAllAdv() {
 		Item.register();
 		User.register();
-		UserRating.register();
+		// UserRating.register(); TO ENABLE ONCE IT WORKS.
 	}
 
 }

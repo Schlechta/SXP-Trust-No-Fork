@@ -18,6 +18,8 @@ package model.data.user;
 import java.math.BigInteger;
 import util.secure.AsymKeysImpl;
 import controller.ManagerBridge;
+import model.advertisement.AdvertisementInstaciator;
+import net.jxta.document.AdvertisementFactory;
 
 import org.jdom2.Element;
 
