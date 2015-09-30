@@ -74,11 +74,11 @@ public class UserRate extends AbstractAdvertisement{
 	}
 
 	// Getters
-	public String getRapidity() {
+	public float getRapidity() {
 		return rapidity;
 	}
 
-	public String getConformity() {
+	public float getConformity() {
 		return conformity;
 	}
 
@@ -87,7 +87,7 @@ public class UserRate extends AbstractAdvertisement{
 		this.rapidity = (rapidity < 0 || rapidity > 5) ? -1 : rapidity;
 	}
 
-	public void setConfromity(float conformity) {
+	public void setConformity(float conformity) {
 		this.conformity = (conformity < 0 || conformity > 5) ? -1 : conformity;
 	}
 
@@ -107,8 +107,8 @@ public class UserRate extends AbstractAdvertisement{
 	 */
 	@Override
 	protected void putValues() {
-		this.addValue("rapidity", this.getRapidity().toString());
-		this.addValue("conformity", this.getConformity().toString());
+		this.addValue("rapidity", Float.toString (this.getRapidity()));
+		this.addValue("conformity", Float.toString (this.getConformity()));
 	}
 
 	@Override
@@ -120,8 +120,8 @@ public class UserRate extends AbstractAdvertisement{
 	protected boolean handleElement(org.jdom2.Element e) {
 		String val = e.getText();
 		switch(e.getName()) {
-			case "rapidity": setRapidity(new Float(val)); return true;
-			case "conformity": setConformity(new Float(val)); return true;
+			case "rapidity": setRapidity(Float.parseFloat(val)); return true;
+			case "conformity": setConformity(Float.parseFloat(val)); return true;
 		}
 		return false;
 	}

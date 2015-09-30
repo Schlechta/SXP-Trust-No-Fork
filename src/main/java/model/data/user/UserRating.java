@@ -104,20 +104,20 @@ public class UserRating extends UserRate{
 
 	// Getters
 
-	public String getPubKeyFrom() {
+	public BigInteger getPubKeyFrom() {
 		return pubKeyFrom;
 	}
 
-	public String getPubKeyTo() {
+	public BigInteger getPubKeyTo() {
 		return pubKeyTo;
 	}
 
-	public String getDate() {
+	public long getDate() {
 		return date;
 	}
 
 	public UserRate getRate() {
-		return new UserRate (super.rapidity, super.conformity);
+		return new UserRate (super.getRapidity(), super.getConformity());
 	}
 
 	// Setters
@@ -142,6 +142,10 @@ public class UserRating extends UserRate{
 		this.pubKeyTo = pubKeyTo;
 	}
 
+	public void setDate (long date){
+		this.date = date;
+	}
+
 	// Advertisement
 
 	/**
@@ -163,7 +167,7 @@ public class UserRating extends UserRate{
 		super.putValues();
 		this.addValue("pubKeyFrom", this.getPubKeyFrom().toString());
 		this.addValue("pubKeyTo", this.getPubKeyTo().toString());
-		this.addValue("date", this.getDate().toString());
+		this.addValue("date", Long.toString(this.getDate()));
 	}
 
 	@Override
@@ -178,7 +182,7 @@ public class UserRating extends UserRate{
 		switch(e.getName()) {
 			case "pubKeyFrom": setPubKeyFrom(new BigInteger(val)); return true;
 			case "pubKeyTo": setPubKeyTo(new BigInteger(val)); return true;
-			case "date": setDate(new Long(val)); return true;
+			case "date": setDate(Long.parseLong(val)); return true;
 		}
 
 		return super.handleElement(e);

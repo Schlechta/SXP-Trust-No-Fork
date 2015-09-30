@@ -141,6 +141,9 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	public UserRate getRate(){
 		return rate;
 	}
+	public String getRateAsString(){
+		return Float.toString(rate.getRapidity()) + "|" + Float.toString(rate.getConformity());
+	}
 	public String getClearPwd(){
 		return clearPassword;
 	}
@@ -181,6 +184,11 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 	}
 	public void setRate(){
 		this.rate = new UserRate();
+	}
+	public void setRateFromString(String rate){
+		String s[] = rate.split ("|");
+	
+		this.rate = new UserRate(Float.parseFloat(s[0]), Float.parseFloat(s[1]));
 	}
 	public void setClearPwd(String password){
 		this.clearPassword = password;
@@ -223,7 +231,7 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 		this.addValue("email", this.getEmail());
 		this.addValue("phone", this.getPhone());
 		this.addValue("date", Long.toString(this.getDate()));
-		this.addValue("rate", 
+		this.addValue("rate", getRateAsString());
 	}
 
 	@Override
@@ -262,6 +270,9 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 				all &= handleElement(f);
 			}
 			return all;
+		case "rate":
+			setRateFromString(val);
+			return true;
 		default:
 			return false;
 		}
@@ -314,6 +325,7 @@ public class User extends AbstractAdvertisement implements Comparable<User>{
 		u.setNick(this.getNick());
 		u.setPhone(this.getPhone());
 		u.setHashPwd(this.getHashPwd());
+		u.setRate(this.getRate());
 		return u;
 	}
 
