@@ -129,8 +129,6 @@ function newRowItemSearch(content){
 	$(row).find(".rowDescription").attr("onclick", "loadItemSearch('" + content.itemKey + "');");
 	$(row).find(".rowTitle .resume").append(content.title);
 	$(row).find(".rowDescription .resume").text(description);
-	$(row).find("#conformity").text(content.conformity + "/5");
-	$(row).find("#rapidity").text(content.rapidity + "/5");
 	$(row).find("#title").text(content.title);
 	$(row).find("#category").text(content.category);
 	$(row).find("#type").text(content.type);
